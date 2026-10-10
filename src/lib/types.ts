@@ -23,6 +23,7 @@ export type Product = {
   hidden?: boolean; // saytda ko'rinmaydi
   soldOut?: boolean; // "Tugagan" — ko'rinadi, lekin buyurtma qilib bo'lmaydi
   featured?: boolean; // bosh sahifadagi katta carousel'da
+  since?: number; // qaysi seed versiyasida qo'shilgan (eski saqlangan katalogga avtomatik qo'shish uchun)
   rating?: number; // DEMO reyting (bo'sh — avtomatik); haqiqiy versiyada mijozlar baholaridan hisoblanadi
   reviews?: number;
 };
@@ -34,6 +35,7 @@ export type Reel = {
   video?: string; // URL: /videos/... yoki /media/...
   caption: string;
   hidden?: boolean;
+  since?: number;
 };
 
 export type Category = { id: string; name: string };
@@ -52,6 +54,7 @@ export type Settings = {
 
 export type Catalog = {
   version: number;
+  seed?: number; // boshlang'ich katalog versiyasi (src/data/seed.ts)
   settings: Settings;
   categories: Category[];
   products: Product[];

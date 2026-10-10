@@ -19,7 +19,8 @@ export function bump(el: Element | null) {
 
 // Mahsulot rasmi savat ikonkasiga "uchib" boradi
 export function flyToCart(from: Element | null | undefined, src: string) {
-  const to = document.querySelector("[data-cart-target]");
+  // telefonda pastki menyudagi, desktopda header'dagi savat — qaysi biri ko'rinib tursa
+  const to = [...document.querySelectorAll("[data-cart-target]")].find((el) => el.getBoundingClientRect().width > 0);
   if (!from || !to || !motionOn() || !document.body.animate) return;
   const a = from.getBoundingClientRect();
   const b = to.getBoundingClientRect();

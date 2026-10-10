@@ -100,6 +100,13 @@ export default function ProductSheet({ product: p, initialColor = 0, onClose }: 
                   <button key={k} className={i === slide ? "is-on" : ""} onClick={() => goSlide(i)} aria-label={`${i + 1}-rasm`} />
                 ))}
               </div>
+              <div className="thumbs">
+                {photos.map((k, i) => (
+                  <button key={k} className={i === slide ? "is-on" : ""} onClick={() => goSlide(i)} aria-label={`${i + 1}-rasm`}>
+                    <Img k={k} />
+                  </button>
+                ))}
+              </div>
               <button className="gallery__nav gallery__nav--l" onClick={() => goSlide(Math.max(0, slide - 1))} aria-label="Oldingi rasm">
                 <Icon name="left" />
               </button>

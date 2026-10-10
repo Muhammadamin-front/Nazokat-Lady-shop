@@ -17,7 +17,7 @@ const faq = (SHOP: Settings) => [
 ];
 
 export default function InfoView() {
-  const SHOP = useCatalog().settings;
+  const { settings: SHOP, categories: cats } = useCatalog();
   const FAQ = faq(SHOP);
   return (
     <section className="info">
@@ -27,7 +27,8 @@ export default function InfoView() {
         </span>
         <h2>{SHOP.name}</h2>
         <p>
-          Ayollar uchun sumkalar, kardiganlar, kostyumlar va uy kiyimlari. <b>Hammasi {money(SHOP.price)}.</b>
+          Ayollar uchun {cats.slice(0, 5).map((c) => c.name.toLowerCase()).join(", ")}
+          {cats.length > 5 ? " va boshqalar" : ""}. <b>Hammasi {money(SHOP.price)}.</b>
         </p>
       </div>
 

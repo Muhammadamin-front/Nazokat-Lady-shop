@@ -1133,13 +1133,14 @@ textarea {
 .tab.is-on .ico {
   fill: var(--brand-soft);
 }
+/* ikonka ustini yopmasin: badge ikonkaning yuqori-o'ng burchagidan boshlanadi */
 .badge {
   position: absolute;
-  top: -5px;
-  right: -11px;
-  min-width: 19px;
-  height: 19px;
-  padding: 0 5px;
+  top: -8px;
+  left: calc(100% - 8px);
+  min-width: 14px;
+  height: 18px;
+  padding: 0 2px; /* bitta raqam — doira, ko'p raqam — o'zi kengayadi */
   border-radius: 999px;
   border: 2px solid #fff;
   background: var(--brand);
@@ -2799,5 +2800,541 @@ html[data-motion="full"] .hero:not(.is-paused) .cta__arrow {
   .btn:active,
   .card__add:active {
     transform: none;
+  }
+}
+
+/* ============ desktop (≥1024px) ============
+   Telefon dizayni o'zgarmaydi; bu yerda faqat katta ekran uchun tuzilma:
+   bir qatorli header + navigatsiya, TabBar yo'q, 1400px konteyner, katalog yon paneli, savat ikki ustun. */
+.hnav,
+.hicons,
+.search--desk,
+.cat-side {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 40px;
+  }
+
+  /* header */
+  .header {
+    padding: 14px var(--gutter);
+  }
+  .header__row {
+    max-width: 1400px;
+    gap: 24px;
+  }
+  .logo__mark {
+    width: 44px;
+    height: 44px;
+  }
+  .logo__text {
+    font-size: 25px;
+  }
+  .search--mob,
+  .ig-pill,
+  .tabbar {
+    display: none;
+  }
+  .hnav {
+    display: flex;
+    gap: 2px;
+  }
+  .hnav button {
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-2);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .hnav button:hover {
+    background: var(--surface-2);
+  }
+  .hnav button.is-on {
+    color: var(--brand);
+  }
+  .search--desk {
+    display: flex;
+    flex: 1;
+    max-width: 560px;
+    margin: 0 0 0 auto;
+  }
+  .hicons {
+    display: flex;
+    gap: 4px;
+  }
+  .hicon {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .hicon:hover {
+    background: var(--surface-2);
+  }
+  .hicon.is-on {
+    color: var(--brand);
+  }
+  .hicon.is-on .ico {
+    fill: var(--brand-soft);
+  }
+  .hicon__in {
+    position: relative;
+    display: grid;
+  }
+
+  /* layout */
+  .main {
+    max-width: 1400px;
+    padding: 8px var(--gutter) 72px;
+  }
+  .toast {
+    bottom: 28px;
+  }
+  .section {
+    margin-top: 64px;
+  }
+  .section__head {
+    margin-bottom: 20px;
+  }
+  .section__head h2,
+  .howto h2 {
+    font-size: 38px;
+  }
+  .section__head .muted {
+    font-size: 14px;
+  }
+
+  /* stories */
+  .stories {
+    gap: 22px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .story-dot {
+    width: 92px;
+  }
+  .story-dot__ring {
+    width: 86px;
+    height: 86px;
+  }
+  .story-dot__label {
+    font-size: 13px;
+  }
+
+  /* hero */
+  .hero {
+    grid-template-columns: 1fr 1.05fr;
+    height: min(660px, 76vh);
+    border-radius: 32px;
+  }
+  .hero__copy {
+    padding: 56px 64px;
+  }
+  .hero__copy h1 {
+    font-size: clamp(66px, 6.2vw, 96px);
+  }
+  .hero__sub {
+    font-size: 18px;
+    max-width: 38ch;
+    margin-top: 16px;
+  }
+  .hero__actions {
+    margin-top: 28px;
+    gap: 12px;
+  }
+  .hero__actions .btn {
+    height: 56px;
+    padding: 0 28px;
+    font-size: 16px;
+  }
+  .hero__tag {
+    top: 38px;
+    left: 18px;
+  }
+  .segs {
+    left: 18px;
+    right: 18px;
+    top: 14px;
+  }
+
+  .marquee {
+    margin-inline: 0;
+    border-radius: 18px;
+    padding: 14px 0;
+  }
+  .marquee__track span {
+    font-size: 18px;
+  }
+  .fc {
+    margin-inline: 0;
+    border-radius: 32px;
+  }
+  .reel-row {
+    gap: 14px;
+  }
+  .reel-card {
+    flex-basis: 210px;
+    border-radius: 22px;
+  }
+  .reel-card__cap {
+    font-size: 14px;
+  }
+
+  /* katalog: yon panel + grid */
+  .catalog__layout {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+  }
+  .cat-side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: sticky;
+    top: 96px;
+  }
+  .cat-side h3 {
+    padding-left: 12px;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cat-side ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .cat-side button {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    text-align: left;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .cat-side button:hover {
+    background: var(--surface);
+  }
+  .cat-side button.is-on {
+    background: var(--ink);
+    color: #fff;
+  }
+  .cat-side small {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .cat-side button.is-on small {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .cat-side__note {
+    margin-top: 8px;
+    padding: 18px 16px;
+    border-radius: 18px;
+    background: var(--brand-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cat-side__note b {
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--brand-ink);
+  }
+  .cat-side__note span {
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .catalog .chips {
+    display: none;
+  }
+  .grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 36px 20px;
+  }
+  .catalog .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .card__media {
+    border-radius: 20px;
+    transition: box-shadow 0.35s var(--ease);
+  }
+  .card:hover .card__media {
+    box-shadow: 0 22px 40px -22px rgba(60, 20, 40, 0.5);
+  }
+  .card__name {
+    font-size: 15px;
+  }
+  .card__add:hover {
+    background: var(--brand);
+  }
+  .chip:hover,
+  .size:hover {
+    border-color: var(--ink);
+  }
+
+  /* qanday buyurtma + instagram blok */
+  .howto li {
+    padding: 22px;
+  }
+  .insta {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    border-radius: 32px;
+  }
+  .insta__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .insta__body {
+    padding: 48px;
+    gap: 14px;
+  }
+  .insta__avatar {
+    position: static;
+    border: 0;
+  }
+  .insta h2 {
+    font-size: 36px;
+  }
+  .foot {
+    grid-column: 1 / -1;
+    padding-top: 18px;
+  }
+
+  /* savat: chapda tovarlar, o'ngda yopishqoq forma */
+  .cart {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    gap: 16px 32px;
+    align-items: start;
+    margin-top: 28px;
+  }
+  .cart .section__head {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .cart .lines {
+    grid-column: 1;
+    gap: 12px;
+  }
+  .cart .form {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    position: sticky;
+    top: 96px;
+    margin-top: 0;
+    padding: 24px;
+  }
+  .line {
+    padding: 14px;
+    gap: 18px;
+  }
+  .line__img {
+    width: 100px;
+    height: 132px;
+  }
+  .line__info h3 {
+    font-size: 16px;
+  }
+
+  .info {
+    max-width: 760px;
+    margin: 40px auto 0;
+    padding: 40px;
+  }
+  .empty {
+    padding: 110px 20px;
+  }
+
+  /* mahsulot oynasi */
+  .sheet {
+    width: min(1140px, 92vw);
+    height: min(760px, 90vh);
+  }
+  .sheet__body {
+    padding: 36px 40px 12px;
+  }
+  .sheet__title {
+    font-size: 36px;
+  }
+  .buybar {
+    padding: 16px 40px 28px;
+  }
+}
+
+/* ---------- desktop boshqaruvlari: faqat sichqoncha/trackpad + katta ekran ---------- */
+.section__tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.row-nav,
+.story__arrow,
+.reels__nav,
+.thumbs {
+  display: none;
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .row-nav {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+  .row-nav:hover {
+    border-color: var(--ink);
+  }
+  .row-nav .ico {
+    width: 18px;
+    height: 18px;
+  }
+  .section__tools .link {
+    margin-left: 10px;
+  }
+
+  /* story: kadrdan tashqarida strelkalar */
+  .story__arrow {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    margin-top: -26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    transition: background-color 0.2s;
+  }
+  .story__arrow:hover {
+    background: rgba(255, 255, 255, 0.26);
+  }
+  .story__arrow--l {
+    left: calc(50% - 320px);
+  }
+  .story__arrow--r {
+    right: calc(50% - 320px);
+  }
+
+  /* reels: o'ng tomonda yuqoriga/pastga */
+  .reels__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    right: calc(50% - 320px);
+    transform: translateY(-50%);
+  }
+  .reels__nav button {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    transition: background-color 0.2s, opacity 0.2s;
+  }
+  .reels__nav button:hover {
+    background: rgba(255, 255, 255, 0.26);
+  }
+  .reels__nav button:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
+  /* mahsulot oynasi: nuqtalar o'rniga kichik rasmlar */
+  .gallery .dots {
+    display: none;
+  }
+  .thumbs {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    max-width: calc(100% - 32px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .thumbs button {
+    position: relative;
+    flex: none;
+    width: 56px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    opacity: 0.75;
+    transition: opacity 0.2s, border-color 0.2s;
+  }
+  .thumbs button .img {
+    position: absolute;
+    inset: 0;
+  }
+  .thumbs button:hover,
+  .thumbs button.is-on {
+    opacity: 1;
+    border-color: #fff;
+  }
+}
+
+/* desktop: ⋯ menyusi pastdan chiqadigan sheet emas, ikonka ostidagi dropdown */
+@media (min-width: 1024px) {
+  .more .modal__bg {
+    background: rgba(25, 10, 18, 0.12);
+  }
+  .more__panel {
+    top: 72px;
+    bottom: auto;
+    left: auto;
+    right: max(var(--gutter), calc((100vw - 1400px) / 2 + var(--gutter)));
+    width: 380px;
+    margin: 0;
+    padding: 10px 10px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 48px -20px rgba(60, 20, 40, 0.35);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.3s var(--ease);
+  }
+  .more.is-open .more__panel {
+    opacity: 1;
+    transform: none;
+  }
+  .more__grab {
+    display: none;
   }
 }

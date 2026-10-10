@@ -44,6 +44,28 @@ export function mediaSrc(c: Catalog, key: string, size: "sm" | "lg" = "sm") {
   return m.src ? m.src[size] : `${m.base}${key}-${size}.${m.ext}`;
 }
 
+// Loyiha bilan kelgan katalog yangilansa (seed versiyasi oshsa), admin saqlagan eski katalogga
+// faqat YANGI qo'shilgan tovar/video/kategoriyalar qo'shiladi — admin o'chirganlari qaytib chiqmaydi.
+export function mergeSeed(stored: Catalog | null, seed: Catalog): Catalog {
+  if (!stored) return seed;
+  const from = stored.seed ?? 1;
+  const to = seed.seed ?? 1;
+  if (from >= to) return stored;
+  const fresh = <T extends { id: string; since?: number }>(list: T[], have: T[]) =>
+    list.filter((x) => (x.since ?? 1) > from && !have.some((h) => h.id === x.id));
+  const newProducts = fresh(seed.products, stored.products);
+  const cats = seed.categories.filter((c) => !stored.categories.some((s) => s.id === c.id));
+  return {
+    ...stored,
+    seed: to,
+    // yangi kategoriyalar seed'dagi tartib bo'yicha oldinga
+    categories: [...cats, ...stored.categories],
+    products: [...newProducts, ...stored.products],
+    reels: [...fresh(seed.reels, stored.reels), ...stored.reels],
+    media: { ...seed.media, ...stored.media },
+  };
+}
+
 // Saytga faqat ko'rinadigan narsalar chiqadi
 export function publicCatalog(c: Catalog): Catalog {
   const products = c.products.filter((p) => !p.hidden && allPhotos(p).length);

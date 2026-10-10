@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StoreProvider } from "@/lib/store";
 import { UIContext, type Tab, type ToastAction, type UI } from "@/lib/ui";
 import { CatalogProvider } from "@/lib/catalog-context";
-import { buildStories, byId, publicCatalog } from "@/lib/catalog";
+import { buildStories, byId, mergeSeed, publicCatalog } from "@/lib/catalog";
 import { DEMO_EVENT, loadCatalog } from "@/lib/demo-store";
 import type { Catalog } from "@/lib/types";
 import Header from "./Header";
@@ -49,7 +49,7 @@ export default function Shop({ seed }: { seed: Catalog }) {
   const [catalog, setCatalog] = useState(() => publicCatalog(seed));
 
   useEffect(() => {
-    const sync = () => setCatalog(publicCatalog(loadCatalog() ?? seed));
+    const sync = () => setCatalog(publicCatalog(mergeSeed(loadCatalog(), seed)));
     sync();
     const onStorage = (e: StorageEvent) => e.key?.startsWith("nazokat:admin") && sync();
     window.addEventListener("storage", onStorage);
@@ -134,6 +134,8 @@ function ShopInner({ catalog }: { catalog: Catalog }) {
           if (tab !== "home") setTab("home");
         }}
         showSearch={tab === "home"}
+        tab={tab}
+        onMore={() => setMore(true)}
       />
       <main className="main">
         {tab === "home" && <Home q={q} clearSearch={() => setQ("")} />}

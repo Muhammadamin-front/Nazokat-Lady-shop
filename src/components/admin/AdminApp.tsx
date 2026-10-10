@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CatalogProvider } from "@/lib/catalog-context";
+import { mergeSeed } from "@/lib/catalog";
 import { loadCatalog, loadOrders, saveCatalog, saveOrders } from "@/lib/demo-store";
 import type { Catalog, Order } from "@/lib/types";
 import Flower from "../Flower";
@@ -134,7 +135,7 @@ function Panel({ seed, onLogout }: { seed: Catalog; onLogout: () => void }) {
   const toastTimer = useRef(0);
 
   useEffect(() => {
-    setCatalog(loadCatalog() ?? seed);
+    setCatalog(mergeSeed(loadCatalog(), seed));
     // Shu qurilmadagi haqiqiy buyurtmalar + (birinchi marta) namunaviy demo buyurtmalar
     const stored = loadOrders();
     const list = stored.some((o) => o.demo) ? stored : [...stored, ...demoOrders(seed)];

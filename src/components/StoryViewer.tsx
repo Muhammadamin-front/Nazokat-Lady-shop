@@ -125,6 +125,13 @@ export default function StoryViewer({ start, onClose }: { start: number; onClose
           </div>
         )}
       </div>
+      {/* desktop: kadrdan tashqaridagi strelkalar (telefonda chap/o'ng tomonga bosiladi) */}
+      <button className="story__arrow story__arrow--l" onClick={prev} aria-label="Oldingi">
+        <Icon name="left" />
+      </button>
+      <button className="story__arrow story__arrow--r" onClick={next} aria-label="Keyingi">
+        <Icon name="right" />
+      </button>
     </div>
   );
 }

@@ -37,7 +37,13 @@ export default function ReelsViewer({ start, onClose }: { start: number; onClose
       { root: el, threshold: 0.6 }
     );
     el.querySelectorAll(".reel").forEach((r) => io.observe(r));
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        el.scrollBy({ top: (e.key === "ArrowDown" ? 1 : -1) * el.clientHeight, behavior: "smooth" });
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       io.disconnect();
@@ -96,6 +102,14 @@ export default function ReelsViewer({ start, onClose }: { start: number; onClose
         )}
       </div>
 
+      <div className="reels__nav">
+        <button onClick={() => feed.current?.scrollBy({ top: -feed.current.clientHeight, behavior: "smooth" })} aria-label="Oldingi video" disabled={active === 0}>
+          <Icon name="up" />
+        </button>
+        <button onClick={() => feed.current?.scrollBy({ top: feed.current.clientHeight, behavior: "smooth" })} aria-label="Keyingi video" disabled={active === REELS.length - 1}>
+          <Icon name="down" />
+        </button>
+      </div>
       <div className="reels__feed" ref={feed}>
         {REELS.map((r, i) => {
           const p = r.product ? byId(catalog, r.product) : undefined;

@@ -98,7 +98,8 @@ export default function Hero() {
           <span className="w" style={{ ["--i" as string]: 2 }}>so&apos;m</span>
         </h1>
         <p className="hero__sub">
-          {SHOP.city}dagi ayollar butigi: {catalog.categories.map((c) => c.name.toLowerCase()).join(", ")} — bitta narxda.
+          {SHOP.city}dagi ayollar butigi: {catalog.categories.slice(0, 3).map((c) => c.name.toLowerCase()).join(", ")}
+          {catalog.categories.length > 3 ? " va boshqalar" : ""} — bitta narxda.
         </p>
         <div className="hero__actions">
           <a
